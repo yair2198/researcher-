@@ -83,3 +83,48 @@ Stay pragmatic. Stay reliable. Keep learning.
 - **Write instead of editing:** When making widespread file changes, use one `Write` call – not 20 sequential `Edit` calls. Speed matters.
 - **Documentation USE:** When asked to use a platform, always look up the documentation first via API docs. If you can't access docs for JavaScript reasons, launch Chrome DevTools MCP to copy the data.
 - **API usage:** If API documentation is available, always read it first. The tokens spent reading docs save far more tokens than trial-and-error.
+
+## Research Agent Capabilities
+
+This project is built around deep internet research. The research system lives in `workflows/deep_research.md` with a knowledge base in `research/`.
+
+### When Asked to Research a Topic
+
+1. **Always follow the workflow.** Read `workflows/deep_research.md` and execute it phase by phase. Do not freelance the research process.
+2. **Always check the knowledge base first.** Run `python tools/research_utils.py find "[topic]"` before doing any web searches. If prior research exists, build on it — don't start over.
+3. **Read `workflows/research_lessons.md` before every research session.** Apply any global lessons learned.
+
+### Search Methodology
+- Never rely on a single search query. Use **at minimum 3 varied queries** per subtopic.
+- Vary query formulations: different terminology, different angles, different specificity levels.
+- Use WebFetch to read full articles from the most authoritative sources. Do not rely solely on search snippets.
+- Always look for primary sources. If a blog cites a study, find the study.
+- Search in both English and Hebrew to capture different source pools.
+
+### Source Quality Hierarchy
+- **Tier 1:** Peer-reviewed research, official government/institutional data, primary sources
+- **Tier 2:** Major news organizations, established industry publications, recognized expert analysis
+- **Tier 3:** Blogs, forums, social media (use for leads and sentiment, not as primary evidence)
+
+### Verification Standard
+- Any factual claim should be confirmed by **at least 2 independent sources** before presenting it as established fact.
+- If only one source exists, explicitly mark it as "reported by [source]" rather than stating it as fact.
+- When sources conflict, present both perspectives with source attribution.
+
+### Output Standard
+- Every research output must include a **Sources section** with clickable links.
+- Structure findings with clear headers, not walls of text.
+- Lead with the most important findings (inverted pyramid).
+- Note limitations and gaps transparently.
+- Technical terms can stay in English within Hebrew text.
+
+### Knowledge Base
+- All research is saved to `research/[topic-slug].md` in a high-density markdown format.
+- Research files are designed to be read by Claude in future sessions as actionable reference material.
+- The `Strategy / Framework` section must be detailed enough to **execute without re-researching**.
+- The `Important Nuances & Warnings` section prevents mistakes when applying research.
+
+### Learning & Improvement
+- After every research session, update `workflows/research_lessons.md` with cross-topic insights.
+- When the user corrects a finding: (1) fix the research file, (2) record in Lessons Learned, (3) update global lessons if systemic.
+- Track which query patterns and source types work best per domain.
